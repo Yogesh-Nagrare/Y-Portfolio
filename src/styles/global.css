@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg:        #0a0a0a;
+  --bg2:       #0f0f0f;
+  --bg3:       #080808;
+  --bg4:       #111111;
+  --bg5:       #161616;
+
+  --border:    #1a1a1a;
+  --border2:   #222222;
+  --border3:   #2a2a2a;
+  
+  /* everything else stays the same */
+  --text:      #d4dde4;
+  --text2:     #8fa3ad;
+  --text3:     #506070;
+  --text4:     #324050;
+
+  --green:     #00ed64;
+  --green2:    #00c853;
+  --green3:    #00a843;
+  --green-bg:  #001a12;
+  --green-dim: rgba(0,237,100,0.07);
+
+  --syn-key:   #00ed64;
+  --syn-str:   #00ed64;
+  --syn-num:   #fee823;
+  --syn-bool:  #c87c48;
+  --syn-arr:   #7a9ec8;
+  --syn-null:  #506070;
+  --syn-id:    #7a6eb4;
+
+  --red:       #e05555;
+  --red-dim:   rgba(224,85,85,0.1);
+
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius:    5px;
+  --radius-lg: 8px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 13px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+a { color: var(--green); text-decoration: none; }
+a:hover { color: var(--green2); text-decoration: underline; }
+button { cursor: pointer; font-family: var(--sans); }
+input, textarea { font-family: var(--mono); caret-color: var(--green); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border3); }
+
+/* ── Animations ── */
+@keyframes fadeIn  { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse   { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes blink   { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+.fade-in  { animation: fadeIn  0.25s ease both; }
+.slide-in { animation: slideIn 0.2s ease both; }
+.mono     { font-family: var(--mono); }
+
+/* ── Buttons ── */
+.mg-btn {
+  font-size: 11px;
+  padding: 4px 11px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  transition: all 0.15s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.mg-btn:hover {
+  background: var(--bg5);
+  border-color: var(--border3);
+  color: var(--text);
+}
+
+.mg-btn-green {
+  background: var(--green);
+  border-color: var(--green);
+  color: #001a10;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.mg-btn-green:hover {
+  background: var(--green2);
+  border-color: var(--green2);
+}
+
+.mg-btn-outline-green {
+  border-color: rgba(0,237,100,0.25);
+  color: var(--green);
+  background: transparent;
+}
+.mg-btn-outline-green:hover {
+  background: var(--green-bg);
+  border-color: rgba(0,237,100,0.45);
+}
+
+/* ── Document card ── */
+.doc-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  animation: fadeIn 0.25s ease both;
+}
+.doc-card:hover {
+  border-color: var(--border3);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+/* ── Syntax color classes ── */
+.fk   { color: var(--syn-key);  }
+.fv-s { color: var(--syn-str);  }
+.fv-n { color: var(--syn-num);  }
+.fv-a { color: var(--syn-arr);  }
+.fv-b { color: var(--syn-bool); }
+.fv-o { color: var(--syn-null); }
+.fsep { color: var(--text4);    }
+
+/* ── Status badges ── */
+.collection-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+.status-active {
+  background: rgba(0,200,83,0.1);
+  color: #00c853;
+  border: 1px solid rgba(0,200,83,0.2);
+}
+.status-archived {
+  background: rgba(50,64,80,0.4);
+  color: var(--text3);
+  border: 1px solid var(--border);
+}
+.status-current {
+  background: rgba(110,180,200,0.1);
+  color: var(--syn-key);
+  border: 1px solid rgba(110,180,200,0.2);
+}
