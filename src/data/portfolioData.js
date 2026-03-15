@@ -37,7 +37,7 @@ export const PROJECTS = [
     stars: 0,
     forks: 0,
     status: "active",
-    topics: ["react", "judge0", "code-editor", "dsa"],
+    topics: ["mern", "ai", "judge0", "code-editor", "dsa"],
     url: "https://github.com/Yogesh-Nagrare/AlgoSprint",
     demo: "https://algo-sprint-iota.vercel.app",
   },
