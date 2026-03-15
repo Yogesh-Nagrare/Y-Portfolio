@@ -45,7 +45,7 @@ export default function AboutCollection({ onAction }) {
               <Field k="open_to_work"    v={USER.available} />
               <a><Field k="github"          v={USER.github} /></a>
               <Field k="linkedin"        v={USER.linkedin} />
-              <Field k="bio"             v={USER.bio.slice(0, 60) + "..."} />
+              <Field k="bio"             v={USER.bio} />
             </div>
             <DocActions
               onEdit={() => onAction("Editing about_me document...")}

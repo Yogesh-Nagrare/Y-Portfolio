@@ -4,6 +4,7 @@ export const USER = {
   name:       "Yogesh Nagrare",
   username:   "yogesh_nagrare",
   // phone:      "+91 9284150677",
+  // skill:      "MERN Stack (React, Node.js, Express, MongoDB) | JavaScript | DSA | AI Integration",
   branch:     "Computer Science and Engineering",
   year:       "3rd Year",
   role:       "Full Stack Developer | MERN Stack",
@@ -15,7 +16,7 @@ export const USER = {
   bio:        "BTech student at YCCE Nagpur passionate about building full-stack web applications and solving DSA problems. I enjoy building developer tools, exploring backend systems and integrating AI into applications.",
   available:  true,
   // experience: 2,                                      // ← uncommented, set your value
-  college:    "YCCE Nagpur",
+  college:    "[YCCE]-Yeshwantrao Chavan College of Engineering,Nagpur",
   resumeUrl:  import.meta.env.VITE_RESUME_URL || "",  // ← fixed env variable name
 };
 
@@ -23,7 +24,7 @@ export const SKILLS = [
   { category: "frontend",  proficiency: 80, years: 2, tools: ["React", "Next.js", "Tailwind", "HTML", "CSS", "JavaScript"] },
   { category: "backend",   proficiency: 82, years: 2, tools: ["Node.js", "Express", "REST API"] },
   { category: "database",  proficiency: 90, years: 2, tools: ["MongoDB", "Redis", "SQL"] },
-  { category: "languages", proficiency: 90, years: 3, tools: ["JavaScript", "C++"] },
+  { category: "languages", proficiency: 90, years: 3, tools: ["JavaScript", "C++", "Solidity"] },
 ];
 
 export const PROJECTS = [
