@@ -82,6 +82,7 @@ export default function ContactCollection({ onAction }) {
       </div>
 
       {/* ── Link cards grid ── */}
+      {/* ── Link cards grid ── */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
@@ -89,13 +90,21 @@ export default function ContactCollection({ onAction }) {
         width: "100%",
         maxWidth: 560,
       }}>
-        {LINKS.map((link) => (
+        {LINKS.map((link, index) => (
           <a
             key={link.key}
             href={link.href}
             target={link.key === "email" || link.key === "phone" ? "_self" : "_blank"}
             rel="noreferrer"
-            style={{ textDecoration: "none" }}
+            style={{
+              textDecoration: "none",
+              // Center the third card across both columns
+              ...(index === 2 && {
+                gridColumn: "1 / -1",
+                justifySelf: "center",
+                width: "calc(50% - 12px)", // matches the width of one card (accounts for gap)
+              }),
+            }}
             onClick={(e) => {
               if (link.key === "email") {
                 e.preventDefault();
