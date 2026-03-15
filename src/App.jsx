@@ -60,7 +60,8 @@ export default function App() {
           letterSpacing: "0.02em",
           userSelect: "none",
         }}>
-          MongoDB Compass — Portfolio_DB
+          <span style={{ fontSize: 14 }}>🍃</span>
+          - MongoDB Compass — Portfolio_DB
         </div>
 
         {/* Connection indicator */}
