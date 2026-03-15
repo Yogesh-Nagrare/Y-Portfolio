@@ -57,7 +57,7 @@ export default function ContactCollection({ onAction }) {
           marginBottom: 12,
           letterSpacing: "0.05em",
         }}>
-          {`// db.contact.find({ available: true })`}
+          {/* {`// db.contact.find({ available: true })`} */}
         </div>
         <h2 style={{
           fontSize: 22,
@@ -188,8 +188,8 @@ export default function ContactCollection({ onAction }) {
           boxShadow: "0 0 6px rgba(0,237,100,0.8)",
           animation: "pulse 2s ease-in-out infinite",
         }} />
-        <span>available_for_work</span>
-        <span style={{ color: "var(--text4)", margin: "0 4px" }}>:</span>
+        <span style={{color: "white"}}>available_for_work</span>
+        <span style={{ color: "white", margin: "0 4px" }}>:</span>
         <span style={{ color: "var(--green)" }}>true</span>
       </div>
 
