@@ -10,8 +10,7 @@
   --border:    #1a1a1a;
   --border2:   #222222;
   --border3:   #2a2a2a;
-  
-  /* everything else stays the same */
+
   --text:      #d4dde4;
   --text2:     #8fa3ad;
   --text3:     #506070;
@@ -39,8 +38,16 @@
 
   --radius:    5px;
   --radius-lg: 8px;
+
+  --sidebar-width:  220px;
+  --leftnav-width:  44px;
+  --titlebar-height: 34px;
+  --topbar-height:   44px;
+  --filterbar-height: 46px;
+  --statusbar-height: 30px;
 }
 
+/* ── RESET ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { font-size: 13px; }
 
@@ -59,23 +66,24 @@ a:hover { color: var(--green2); text-decoration: underline; }
 button { cursor: pointer; font-family: var(--sans); }
 input, textarea { font-family: var(--mono); caret-color: var(--green); }
 
-/* ── Scrollbar ── */
+/* ── SCROLLBAR ── */
 ::-webkit-scrollbar       { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border3); }
 
-/* ── Animations ── */
+/* ── ANIMATIONS ── */
 @keyframes fadeIn  { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse   { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 @keyframes blink   { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 @keyframes slideIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
-.fade-in  { animation: fadeIn  0.25s ease both; }
-.slide-in { animation: slideIn 0.2s ease both; }
-.mono     { font-family: var(--mono); }
+.fade-in   { animation: fadeIn   0.25s ease both; }
+.slide-in  { animation: slideIn  0.2s  ease both; }
+.mono      { font-family: var(--mono); }
 
-/* ── Buttons ── */
+/* ── BUTTONS ── */
 .mg-btn {
   font-size: 11px;
   padding: 4px 11px;
@@ -92,7 +100,6 @@ input, textarea { font-family: var(--mono); caret-color: var(--green); }
   border-color: var(--border3);
   color: var(--text);
 }
-
 .mg-btn-green {
   background: var(--green);
   border-color: var(--green);
@@ -104,7 +111,6 @@ input, textarea { font-family: var(--mono); caret-color: var(--green); }
   background: var(--green2);
   border-color: var(--green2);
 }
-
 .mg-btn-outline-green {
   border-color: rgba(0,237,100,0.25);
   color: var(--green);
@@ -115,7 +121,7 @@ input, textarea { font-family: var(--mono); caret-color: var(--green); }
   border-color: rgba(0,237,100,0.45);
 }
 
-/* ── Document card ── */
+/* ── DOCUMENT CARD ── */
 .doc-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -129,7 +135,7 @@ input, textarea { font-family: var(--mono); caret-color: var(--green); }
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
 }
 
-/* ── Syntax color classes ── */
+/* ── SYNTAX COLORS ── */
 .fk   { color: var(--syn-key);  }
 .fv-s { color: var(--syn-str);  }
 .fv-n { color: var(--syn-num);  }
@@ -138,7 +144,7 @@ input, textarea { font-family: var(--mono); caret-color: var(--green); }
 .fv-o { color: var(--syn-null); }
 .fsep { color: var(--text4);    }
 
-/* ── Status badges ── */
+/* ── STATUS BADGES ── */
 .collection-badge {
   display: inline-flex;
   align-items: center;
@@ -163,4 +169,137 @@ input, textarea { font-family: var(--mono); caret-color: var(--green); }
   background: rgba(110,180,200,0.1);
   color: var(--syn-key);
   border: 1px solid rgba(110,180,200,0.2);
+}
+
+/* ── MOBILE OVERLAY ── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 40;
+  animation: fadeIn 0.2s ease both;
+}
+
+/* ── MOBILE HAMBURGER ── */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--text2);
+  padding: 4px 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mobile-menu-btn:hover {
+  background: var(--bg4);
+  color: var(--green);
+}
+
+/* ── RESPONSIVE BREAKPOINTS ── */
+
+/* Tablet — hide sidebar text, show icons only */
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 180px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  body { overflow: hidden; }
+
+  :root {
+    --leftnav-width: 0px;
+    --sidebar-width: 240px;
+  }
+
+  /* Hide left icon nav completely on mobile */
+  .leftnav-desktop {
+    display: none !important;
+  }
+
+  /* Sidebar becomes a drawer */
+  .sidebar-drawer {
+    position: fixed !important;
+    left: 0;
+    top: var(--titlebar-height);
+    height: calc(100vh - var(--titlebar-height));
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    width: var(--sidebar-width) !important;
+  }
+  .sidebar-drawer.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: block;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Topbar adjustments */
+  .topbar-breadcrumb {
+    font-size: 11px !important;
+  }
+  .topbar-actions {
+    gap: 4px !important;
+  }
+  .topbar-actions .mg-btn {
+    font-size: 10px !important;
+    padding: 3px 7px !important;
+  }
+
+  /* FilterBar */
+  .filterbar-wrap {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .filterbar-right {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  /* Doc fields — shrink key column */
+  .field-row {
+    padding: 5px 10px !important;
+  }
+  .field-key {
+    min-width: 110px !important;
+    font-size: 11px !important;
+  }
+  .field-val {
+    font-size: 11px !important;
+  }
+
+  /* Contact grid — single column */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stats grid — 2 columns */
+  .stats-grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Title bar text */
+  .titlebar-text {
+    font-size: 10px !important;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
+  :root {
+    --sidebar-width: 200px;
+  }
+  html { font-size: 12px; }
 }

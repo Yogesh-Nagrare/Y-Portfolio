@@ -1,15 +1,21 @@
 import { useState } from "react";
 import "./styles/global.css";
-import LeftNav        from "./components/LeftNav";
-import Sidebar        from "./components/Sidebar";
-import MainView       from "./components/MainView";
-import Toast          from "./components/Toast";
-import { useToast }   from "./hooks/usePortfolio";
+import LeftNav      from "./components/LeftNav";
+import Sidebar      from "./components/Sidebar";
+import MainView     from "./components/MainView";
+import Toast        from "./components/Toast";
+import { useToast } from "./hooks/usePortfolio";
 
 export default function App() {
   const [activeNav,        setActiveNav]        = useState("collections");
   const [activeCollection, setActiveCollection] = useState("about_me");
+  const [sidebarOpen,      setSidebarOpen]      = useState(false);
   const { toasts, show } = useToast();
+
+  const handleCollectionChange = (col) => {
+    setActiveCollection(col);
+    setSidebarOpen(false);
+  };
 
   return (
     <div style={{
@@ -23,28 +29,34 @@ export default function App() {
       <div style={{
         background: "var(--bg3)",
         borderBottom: "1px solid var(--border)",
-        padding: "0 16px",
-        height: 34,
+        padding: "0 12px",
+        height: "var(--titlebar-height)",
         display: "flex",
         alignItems: "center",
-        gap: 12,
+        gap: 10,
         flexShrink: 0,
+        zIndex: 60,
       }}>
-        {/* macOS traffic lights */}
-        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+        {/* Hamburger — mobile only */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setSidebarOpen(o => !o)}
+          aria-label="Toggle menu"
+        >
+          {sidebarOpen ? "✕" : "☰"}
+        </button>
+
+        {/* Traffic lights — hidden on mobile via inline media */}
+        <div style={{ display: "flex", gap: 6, alignItems: "center" }}
+          className="traffic-lights">
           {[
-            { color: "#e05050", hover: "#f06060" },
-            { color: "#c8a020", hover: "#d8b030" },
-            { color: "#30a840", hover: "#40b850" },
-          ].map((dot, i) => (
-            <div
-              key={i}
-              style={{
-                width: 11, height: 11, borderRadius: "50%",
-                background: dot.color,
-                cursor: "pointer",
-                transition: "filter 0.15s",
-              }}
+            "#e05050", "#c8a020", "#30a840",
+          ].map((color, i) => (
+            <div key={i} style={{
+              width: 11, height: 11, borderRadius: "50%",
+              background: color, cursor: "pointer",
+              transition: "filter 0.15s",
+            }}
               onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.2)"}
               onMouseLeave={e => e.currentTarget.style.filter = "brightness(1)"}
             />
@@ -52,42 +64,63 @@ export default function App() {
         </div>
 
         {/* Title */}
-        <div style={{
+        <div className="titlebar-text" style={{
           flex: 1, textAlign: "center",
-          fontSize: 15.5,
+          fontSize: 11.5,
           color: "var(--text3)",
           fontFamily: "var(--mono)",
           letterSpacing: "0.02em",
           userSelect: "none",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
         }}>
-          <span style={{ fontSize: 14 }}>🍃</span>
-          - MongoDB Compass — Portfolio_DB
+          MongoDB Compass — portfolio_db
         </div>
 
-        {/* Connection indicator */}
+        {/* Connection dot */}
         <div style={{
           display: "flex", alignItems: "center", gap: 5,
           fontSize: 10.5, color: "var(--text3)",
           fontFamily: "var(--mono)",
+          flexShrink: 0,
         }}>
           <div style={{
             width: 5, height: 5, borderRadius: "50%",
             background: "var(--green)",
           }} />
-          Connected
+          <span style={{ display: "var(--connected-text-display, inline)" }}>
+            Connected
+          </span>
         </div>
       </div>
 
       {/* ── Body ── */}
-      <div style={{ display: "flex", flex: 1, overflow: "hidden", width: "100%" }}>
-        <LeftNav
-          active={activeNav}
-          setActive={setActiveNav}
-        />
-        <Sidebar
-          activeCollection={activeCollection}
-          setActiveCollection={setActiveCollection}
-        />
+      <div style={{ display: "flex", flex: 1, overflow: "hidden", width: "100%", position: "relative" }}>
+
+        {/* Mobile overlay */}
+        {sidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setSidebarOpen(false)}
+            style={{ display: "block" }}
+          />
+        )}
+
+        {/* Left icon nav — hidden on mobile via CSS class */}
+        <div className="leftnav-desktop">
+          <LeftNav active={activeNav} setActive={setActiveNav} />
+        </div>
+
+        {/* Sidebar — becomes drawer on mobile */}
+        <div className={`sidebar-drawer ${sidebarOpen ? "open" : ""}`}>
+          <Sidebar
+            activeCollection={activeCollection}
+            setActiveCollection={handleCollectionChange}
+          />
+        </div>
+
+        {/* Main content */}
         <MainView
           collection={activeCollection}
           onAction={(msg, type) => show(msg, type || "success")}

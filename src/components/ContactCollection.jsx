@@ -38,161 +38,212 @@ const LINKS = [
 
 export default function ContactCollection({ onAction }) {
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: "70vh",
-      gap: 48,
-      padding: "40px 24px",
-    }}>
+    <>
+      {/* Inject responsive styles */}
+      <style>{`
+        .contact-page {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 70vh;
+          gap: 40px;
+          padding: 40px 24px;
+        }
+        .contact-grid-inner {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          width: 100%;
+          max-width: 520px;
+        }
+        .contact-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          padding: 32px 20px;
+          background: var(--bg4);
+          border: 1px solid #00ed64;
+          border-radius: 10px;
+          cursor: pointer;
+          width: 100%;
+          box-shadow: 0 0 0 1px #00ed64,
+                      0 0 24px rgba(0,237,100,0.18),
+                      0 0 48px rgba(0,237,100,0.08);
+          transition: box-shadow 0.25s ease, background 0.2s ease;
+          text-decoration: none;
+        }
+        .contact-card:hover {
+          background: var(--bg5);
+          box-shadow: 0 0 0 1px #00ed64,
+                      0 0 32px rgba(0,237,100,0.30),
+                      0 0 64px rgba(0,237,100,0.14);
+        }
+        .contact-card-icon {
+          color: #00ed64;
+          filter: drop-shadow(0 0 8px rgba(0,237,100,0.6));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: filter 0.25s;
+        }
+        .contact-card:hover .contact-card-icon {
+          filter: drop-shadow(0 0 14px rgba(0,237,100,0.9));
+        }
+        .contact-card-label {
+          font-size: 13px;
+          font-weight: 600;
+          color: #00ed64;
+          font-family: var(--mono);
+          margin-bottom: 4px;
+          letter-spacing: 0.02em;
+        }
+        .contact-card-val {
+          font-size: 10px;
+          color: var(--text2);
+          font-family: var(--mono);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 160px;
+          text-align: center;
+        }
+        /* Email card spans full width and centers itself */
+        .contact-card-email-wrap {
+          grid-column: span 2;
+          display: flex;
+          justify-content: center;
+        }
+        .contact-card-email-wrap .contact-card {
+          max-width: calc(50% - 10px);
+        }
 
-      {/* ── Header ── */}
-      <div style={{ textAlign: "center" }}>
-        <div style={{
-          fontSize: 11,
-          color: "var(--text4)",
-          fontFamily: "var(--mono)",
-          marginBottom: 12,
-          letterSpacing: "0.05em",
-        }}>
-          {/* {`// db.contact.find({ available: true })`} */}
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+          .contact-page {
+            gap: 28px;
+            padding: 24px 16px;
+            min-height: 60vh;
+          }
+          .contact-grid-inner {
+            grid-template-columns: 1fr;
+            max-width: 100%;
+            gap: 14px;
+          }
+          .contact-card-email-wrap {
+            grid-column: span 1;
+          }
+          .contact-card-email-wrap .contact-card {
+            max-width: 100%;
+          }
+          .contact-card {
+            padding: 24px 16px;
+            gap: 12px;
+          }
+          .contact-card-val {
+            max-width: 240px;
+            font-size: 10px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .contact-card {
+            padding: 20px 12px;
+          }
+          .contact-card-label {
+            font-size: 12px;
+          }
+        }
+      `}</style>
+
+      <div className="contact-page">
+
+        {/* ── Header ── */}
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{
+            fontSize: 22,
+            fontWeight: 600,
+            color: "var(--text)",
+            fontFamily: "var(--mono)",
+            marginBottom: 8,
+          }}>
+            <span style={{ color: "var(--green)" }}>connect</span>
+            <span style={{ color: "var(--text4)" }}>(</span>
+            <span style={{ color: "var(--syn-str)" }}>"{USER.name.split(" ")[0]}"</span>
+            <span style={{ color: "var(--text4)" }}>)</span>
+          </h2>
+          <p style={{
+            fontSize: 12,
+            color: "var(--text3)",
+            fontFamily: "var(--mono)",
+            letterSpacing: "0.01em",
+          }}>
+            Open to opportunities · collaborations · and conversations
+          </p>
         </div>
-        <h2 style={{
-          fontSize: 22,
-          fontWeight: 600,
-          color: "var(--text)",
-          fontFamily: "var(--mono)",
-          marginBottom: 8,
-        }}>
-          <span style={{ color: "var(--green)" }}>connect</span>
-          <span style={{ color: "var(--text4)" }}>(</span>
-          <span style={{ color: "var(--syn-str)" }}>"Yogesh"</span>
-          <span style={{ color: "var(--text4)" }}>)</span>
-        </h2>
-        <p style={{
-          fontSize: 13,
-          color: "var(--text3)",
-          fontFamily: "var(--mono)",
-          letterSpacing: "0.01em",
-        }}>
-          Open to opportunities · collaborations · and conversations
-        </p>
-      </div>
 
-      {/* ── Link cards grid ── */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: 24,
-        width: "100%",
-        maxWidth: 560,
-      }}>
-        {LINKS.map((link) => (
-          <a
-            key={link.key}
-            href={link.href}
-            target={link.key === "email" || link.key === "phone" ? "_self" : "_blank"}
-            rel="noreferrer"
-            style={{ 
-              textDecoration: "none",
-              // logic to center the third card (Email)
-              gridColumn: link.key === "email" ? "span 2" : "auto",
-              display: "flex",
-              justifyContent: "center"
-            }}
-            onClick={(e) => {
-              if (link.key === "email") {
-                e.preventDefault();
-                navigator.clipboard.writeText(link.val);
-                onAction("Email copied to clipboard!");
-              }
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 16,
-                padding: "32px 20px",
-                background: "var(--bg4)",
-                border: "1px solid #00ed64",
-                borderRadius: 10,
-                cursor: "pointer",
-                position: "relative",
-                overflow: "hidden",
-                boxShadow: "0 0 0 1px #00ed64, 0 0 24px rgba(0,237,100,0.22), 0 0 48px rgba(0,237,100,0.10)",
-                // Keep the Email card width the same as the top two
-                width: link.key === "email" ? "calc(50% - 12px)" : "100%",
-              }}
-            >
-              <div
-                style={{
-                  color: "#00ed64",
-                  filter: "drop-shadow(0 0 10px rgba(0,237,100,0.7))",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+        {/* ── Cards ── */}
+        <div className="contact-grid-inner">
+          {LINKS.map((link) => {
+            const isEmail = link.key === "email";
+            const card = (
+              <a
+                key={link.key}
+                href={link.href}
+                target={isEmail ? "_self" : "_blank"}
+                rel="noreferrer"
+                className="contact-card"
+                onClick={isEmail ? (e) => {
+                  e.preventDefault();
+                  navigator.clipboard.writeText(link.val);
+                  onAction("Email copied to clipboard!");
+                } : undefined}
               >
-                {link.svg}
-              </div>
-
-              <div style={{ textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "#00ed64",
-                    fontFamily: "var(--mono)",
-                    marginBottom: 5,
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {link.label}
+                <div className="contact-card-icon">{link.svg}</div>
+                <div style={{ textAlign: "center" }}>
+                  <div className="contact-card-label">{link.label}</div>
+                  <div className="contact-card-val">{link.val}</div>
                 </div>
-                <div
-                  style={{
-                    fontSize: 10,
-                    color: "var(--text2)",
-                    fontFamily: "var(--mono)",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    maxWidth: 160,
-                  }}
-                >
-                  {link.val}
-                </div>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
+              </a>
+            );
 
-      {/* ── Footer status ── */}
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        fontSize: 11,
-        color: "var(--text4)",
-        fontFamily: "var(--mono)",
-      }}>
+            if (isEmail) {
+              return (
+                <div key={link.key} className="contact-card-email-wrap">
+                  {card}
+                </div>
+              );
+            }
+            return card;
+          })}
+        </div>
+
+        {/* ── Footer status ── */}
         <div style={{
-          width: 6, height: 6, borderRadius: "50%",
-          background: "var(--green)",
-          boxShadow: "0 0 6px rgba(0,237,100,0.8)",
-          animation: "pulse 2s ease-in-out infinite",
-        }} />
-        <span style={{color: "white"}}>available_for_work</span>
-        <span style={{ color: "white", margin: "0 4px" }}>:</span>
-        <span style={{ color: "var(--green)" }}>true</span>
-      </div>
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          fontSize: 11,
+          fontFamily: "var(--mono)",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}>
+          <div style={{
+            width: 6, height: 6,
+            borderRadius: "50%",
+            background: "var(--green)",
+            boxShadow: "0 0 6px rgba(0,237,100,0.8)",
+            animation: "pulse 2s ease-in-out infinite",
+            flexShrink: 0,
+          }} />
+          <span style={{ color: "var(--text2)" }}>available_for_work</span>
+          <span style={{ color: "var(--text4)" }}>:</span>
+          <span style={{ color: "var(--green)" }}>true</span>
+        </div>
 
-    </div>
+      </div>
+    </>
   );
 }

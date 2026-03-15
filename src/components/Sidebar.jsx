@@ -5,10 +5,16 @@ export default function Sidebar({ activeCollection, setActiveCollection }) {
   const [dbExpanded, setDbExpanded] = useState(true);
 
   return (
-    <div style={{
-      width: 220, background: "black", borderRight: "1px solid #2d3748",
-      display: "flex", flexDirection: "column", flexShrink: 0, overflow: "hidden",
-    }}>
+<div style={{
+  width: 220,
+  background: "var(--bg2)",
+  borderRight: "1px solid var(--border)",
+  display: "flex",
+  flexDirection: "column",
+  flexShrink: 0,
+  overflow: "hidden",
+  transition: "width 0.25s ease",
+}}>
       {/* Header */}
       <div style={{ padding: "10px 12px", borderBottom: "1px solid #2d3748" }}>
         <div style={{ fontSize: 10, fontWeight: 600, color: "#7a8a99", textTransform: "uppercase", letterSpacing: ".8px", marginBottom: 8 }}>
