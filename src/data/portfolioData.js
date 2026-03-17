@@ -33,7 +33,7 @@ export const PROJECTS = [
     name: "AlgoSprint",
     description:
       "Interactive DSA practice platform with timed coding challenges and a built-in multi-language code editor powered by Judge0 API with AI-assisted features.",
-    language: "JavaScript",
+    language: "Full Stack with AI integration",
     langColor: "#f1e05a",
     stars: 0,
     forks: 0,
@@ -47,7 +47,7 @@ export const PROJECTS = [
     name: "Uchiha Monitor",
     description:
       "API testing and development tool inspired by Postman with request collections, environment variables, and AI-assisted request generation.",
-    language: "JavaScript",
+    language: "Full Stack with AI integration",
     langColor: "#f1e05a",
     stars: 0,
     forks: 0,
@@ -61,7 +61,7 @@ export const PROJECTS = [
     name: "College Naukri Platform",
     description:
       "Full-stack job portal for college placements where recruiters post jobs and students apply, featuring authentication and role-based dashboards.",
-    language: "JavaScript",
+    language: "Full Stack",
     langColor: "#f1e05a",
     stars: 0,
     forks: 0,
