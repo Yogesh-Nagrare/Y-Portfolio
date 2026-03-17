@@ -59,7 +59,7 @@ export default function MainView({ collection, onAction }) {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden" }}>
+    <div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden", minHeight: 0 }}>
       <Topbar
         collection={collection}
         onAdd={handleAdd}
@@ -72,7 +72,7 @@ export default function MainView({ collection, onAction }) {
         view={view} setView={setView}
         total={total} shown={total}
       />
-      <div style={{ flex: 1, overflowY: "auto", padding: "14px 16px" }}>
+      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", padding: "14px 16px", minHeight: 0 }}>
         {renderCollection()}
       </div>
       <StatusBar collection={collection} shown={total} total={total} queryTime={queryTime} />
