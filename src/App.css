@@ -182,3 +182,68 @@
     border-right-color: var(--border);
   }
 } */
+/* Ensure the app is exactly the screen height */
+:root {
+  --bg: #0c0c0c;
+  --bg3: #161b22;
+  --border: #2d3748;
+  --text3: #8b949e;
+  --mono: 'JetBrains Mono', monospace;
+  --green: #00ed64;
+  --titlebar-height: 38px;
+}
+
+/* Hide desktop Nav on mobile */
+@media (max-width: 768px) {
+  .leftnav-desktop {
+    display: none;
+  }
+  .traffic-lights {
+    display: none !important;
+  }
+}
+
+/* Sidebar Drawer Logic */
+.sidebar-drawer {
+  position: relative;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .sidebar-drawer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 260px;
+    background: var(--bg3);
+    transform: translateX(-100%);
+  }
+  .sidebar-drawer.open {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+  display: none;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
