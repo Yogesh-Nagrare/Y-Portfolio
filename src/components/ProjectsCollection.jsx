@@ -63,13 +63,13 @@ export default function ProjectsCollection({ onAction }) {
                 <div style={{ display: "flex", gap: 6 }}>
                   {proj.demo && (
                     <a href={proj.demo} target="_blank" rel="noreferrer">
-                      <button className="mg-btn mg-btn-outline-green" style={{ fontSize: 11, padding: "3px 10px" }}>
+                      <button className="mg-btn mg-btn-outline-green" style={{ fontSize: 15, padding: "3px 10px" }}>
                         Live Demo
                       </button>
                     </a>
                   )}
                   <a href={proj.url} target="_blank" rel="noreferrer">
-                    <button className="mg-btn mg-btn-outline-green" style={{ fontSize: 11, padding: "3px 10px" }}>
+                    <button className="mg-btn mg-btn-outline-green" style={{ fontSize: 15, padding: "3px 10px" }}>
                       View Code
                     </button>
                   </a>
