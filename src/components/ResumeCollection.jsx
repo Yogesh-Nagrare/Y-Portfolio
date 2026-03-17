@@ -18,7 +18,7 @@ export default function ResumeCollection({ onAction }) {
   const handleDownload = () => {
     if (!hasResume) { onAction("No resume URL set in portfolioData.js", "error"); return; }
     setDownloading(true);
-    const downloadUrl = USER.resumeUrl.replace("/upload/", "/upload/fl_attachment/");
+    const downloadUrl = USER.resumeUrl.replace("/upload/", "/upload/");
     const a       = document.createElement("a");
     a.href        = downloadUrl;
     a.download    = `${USER.name.replace(" ", "_")}_Resume.pdf`;
