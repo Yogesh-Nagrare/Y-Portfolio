@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./styles/global.css";
+import LandingPage from "./components/LandingPage";
 import LeftNav      from "./components/LeftNav";
 import Sidebar      from "./components/Sidebar";
 import MainView     from "./components/MainView";
@@ -7,6 +8,7 @@ import Toast        from "./components/Toast";
 import { useToast } from "./hooks/usePortfolio";
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
   const [activeNav,        setActiveNav]        = useState("collections");
   const [activeCollection, setActiveCollection] = useState("about_me");
   const [sidebarOpen,      setSidebarOpen]      = useState(false);
@@ -16,7 +18,17 @@ export default function App() {
     setActiveCollection(col);
     setSidebarOpen(false);
   };
+  useEffect(() => {
+    // Show landing for 3.5 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3500);
+    return () => clearTimeout(timer);
+  }, []);
 
+  if (loading) {
+    return <LandingPage />;
+  }
   return (
     <div style={{
       width: "100vw", height: "100dvh",
