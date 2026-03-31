@@ -10,6 +10,7 @@ export const USER = {
   role:       "Full Stack Developer | MERN Stack",
   location:   "Nagpur, India",
   email:      "yogeshnagrare2004@gmail.com",
+  phone:      "+91 9284150677",
   website:    "",
   github:     "https://github.com/Yogesh-Nagrare",
   linkedin:   "https://www.linkedin.com/in/yogesh-nagrare4/",
