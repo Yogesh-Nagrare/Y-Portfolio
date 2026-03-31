@@ -51,7 +51,7 @@ export default function App() {
       }}>
         {/* Hamburger — mobile only */}
         <button
-          className="mobile-menu-btn"
+          className="mobile-menu-btn #30a840"
           onClick={() => setSidebarOpen(o => !o)}
           aria-label="Toggle menu"
         >

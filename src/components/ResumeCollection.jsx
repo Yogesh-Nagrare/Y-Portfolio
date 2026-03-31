@@ -15,20 +15,38 @@ export default function ResumeCollection({ onAction }) {
   };
 
   // ── Force download via fl_attachment ──
-  const handleDownload = () => {
-    if (!hasResume) { onAction("No resume URL set in portfolioData.js", "error"); return; }
-    setDownloading(true);
-    const downloadUrl = USER.resumeUrl.replace("/upload/", "/upload/");
-    const a       = document.createElement("a");
-    a.href        = downloadUrl;
-    a.download    = `${USER.name.replace(" ", "_")}_Resume.pdf`;
-    a.target      = "_blank";
-    a.click();
-    setTimeout(() => {
+const handleDownload = () => {
+  if (!hasResume) { onAction("No resume URL set in portfolioData.js", "error"); return; }
+  setDownloading(true);
+
+  // Fetch the file as a blob to force browser download
+  fetch(USER.resumeUrl)
+    .then(res => {
+      if (!res.ok) throw new Error("Fetch failed");
+      return res.blob();
+    })
+    .then(blob => {
+      const blobUrl = URL.createObjectURL(blob);
+      const a       = document.createElement("a");
+      a.href        = blobUrl;
+      a.download    = `${USER.name.replace(" ", "_")}_Resume.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
       setDownloading(false);
       onAction("Resume downloaded! ✓");
-    }, 800);
-  };
+    })
+    .catch(() => {
+      // CORS blocked fetch — fallback: open Cloudinary URL with fl_attachment
+      setDownloading(false);
+      const fallbackUrl = USER.resumeUrl.includes("cloudinary.com")
+        ? USER.resumeUrl.replace("/upload/", "/upload/")
+        : USER.resumeUrl;
+      window.open(fallbackUrl, "_blank");
+      onAction("Opening resume for download...");
+    });
+};
 
   const fields = [
     ["candidate",  USER.name],

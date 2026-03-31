@@ -17,7 +17,7 @@ export default function LandingPage() {
     if (logIndex < LOG_MESSAGES.length - 1) {
       const timeout = setTimeout(() => {
         setLogIndex(prev => prev + 1);
-      }, 400); // Speed of logs
+      }, 450); 
       return () => clearTimeout(timeout);
     }
   }, [logIndex]);
@@ -26,68 +26,104 @@ export default function LandingPage() {
     <div style={{
       height: "100dvh",
       width: "100vw",
-      background: "#001e2b", // MongoDB dark teal
+      background: "#001e2b", 
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       fontFamily: "'JetBrains Mono', monospace",
       color: "#f9fbfa",
-      overflow: "hidden"
+      overflow: "hidden",
+      padding: "0 20px", // Prevents text hitting edges on mobile
+      boxSizing: "border-box"
     }}>
-      {/* MongoDB Leaf Animation */}
-      <div style={{ position: "relative", marginBottom: 40 }}>
-        <svg width="80" height="80" viewBox="0 0 32 32" fill="none">
+      {/* Animation Styles */}
+      <style>{`
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.15); opacity: 1; }
+          100% { transform: scale(1); opacity: 0.6; }
+        }
+
+        @media (max-width: 600px) {
+          .landing-title {
+            flex-direction: column;
+            gap: 4px;
+          }
+          .title-separator {
+            display: none;
+          }
+          .leaf-svg {
+            width: 60px !important;
+            height: 60px !important;
+          }
+        }
+      `}</style>
+
+      {/* Pulsing MongoDB Leaf */}
+      <div style={{ position: "relative", marginBottom: "5vh" }}>
+        <svg className="leaf-svg" width="80" height="80" viewBox="0 0 32 32" fill="none">
           <path d="M16 31C16 31 24 24 24 15C24 6 16 1 16 1C16 1 8 6 8 15C8 24 16 31 16 31Z" fill="#00ed64" />
           <path d="M16 31V1" stroke="#00684a" strokeWidth="1.5" />
-          <style>{`
-            @keyframes pulse {
-              0% { transform: scale(1); opacity: 0.8; }
-              50% { transform: scale(1.1); opacity: 1; }
-              100% { transform: scale(1); opacity: 0.8; }
-            }
-          `}</style>
         </svg>
         <div style={{
           position: "absolute",
-          top: -10, left: -10, right: -10, bottom: -10,
-          border: "2px solid #00ed64",
+          top: -12, left: -12, right: -12, bottom: -12,
+          border: "1.5px solid rgba(0, 237, 100, 0.4)",
           borderRadius: "50%",
           animation: "pulse 2s infinite ease-in-out"
         }} />
       </div>
 
-      <h1 style={{ fontSize: 22, fontWeight: 500, marginBottom: 10, letterSpacing: -0.5 }}>
-        MongoDB <span style={{ color: "#00ed64" }}>Compass</span><span> - </span><span style={{ color: "#00ed64" }}>Portfolio</span><span>_DB</span>
+      {/* Responsive Header */}
+      <h1 className="landing-title" style={{ 
+        fontSize: "clamp(16px, 5vw, 22px)", 
+        fontWeight: 500, 
+        marginBottom: 12, 
+        letterSpacing: -0.5,
+        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }}>
+        <span>MongoDB <span style={{ color: "#00ed64" }}>Compass</span></span>
+        <span className="title-separator" style={{ margin: "0 10px", opacity: 0.4 }}>-</span>
+        <span style={{ color: "#00ed64" }}>Portfolio<span style={{ color: "#f9fbfa" }}>_DB</span></span>
       </h1>
       
-      <div style={{ height: 20 }}>
+      {/* Connection Logs */}
+      <div style={{ height: 24, display: "flex", alignItems: "center" }}>
         <p style={{ 
-          fontSize: 13, 
+          fontSize: "clamp(11px, 3.5vw, 13px)", 
           color: "#8899a6", 
           margin: 0,
           display: "flex",
           alignItems: "center",
-          gap: 10
+          gap: 10,
+          whiteSpace: "nowrap"
         }}>
           <span style={{ 
-            width: 8, height: 8, background: "#00ed64", borderRadius: "50%",
-            boxShadow: "0 0 8px #00ed64" 
+            width: 6, height: 6, background: "#00ed64", borderRadius: "50%",
+            boxShadow: "0 0 8px #00ed64", flexShrink: 0
           }} />
           {LOG_MESSAGES[logIndex]}
         </p>
       </div>
 
-      {/* Progress Bar */}
+      {/* Responsive Progress Bar */}
       <div style={{ 
-        width: 200, height: 2, background: "#0a303d", 
-        marginTop: 30, borderRadius: 1, overflow: "hidden" 
+        width: "min(240px, 60vw)", // Takes 60% of screen width, maxes at 240px
+        height: 2, 
+        background: "#0a303d", 
+        marginTop: 40, 
+        borderRadius: 1, 
+        overflow: "hidden" 
       }}>
         <div style={{ 
           width: `${((logIndex + 1) / LOG_MESSAGES.length) * 100}%`, 
           height: "100%", 
           background: "#00ed64",
-          transition: "width 0.3s ease"
+          transition: "width 0.4s ease-out"
         }} />
       </div>
     </div>
