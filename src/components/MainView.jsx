@@ -138,7 +138,7 @@ const handleDownloadResume = () => {
             flex: 1, minWidth: 0,
           }}>
             <span style={{ color: "var(--green)", fontSize: 12 }}>📄</span>
-            <span style={{ color: "white" }}>resume</span>
+            <span style={{ color: "white" }}>Resume</span>
             <span style={{ color: "var(--text4)" }}>:</span>
             <span style={{
               color: "white",
