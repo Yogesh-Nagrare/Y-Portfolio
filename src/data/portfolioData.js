@@ -7,11 +7,11 @@ export const USER = {
   // skill:      "MERN Stack (React, Node.js, Express, MongoDB) | JavaScript | DSA | AI Integration",
   branch:     "Computer Science and Engineering",
   year:       "3rd Year",
-  role:       "Full Stack Developer | MERN Stack",
+  role:       "AI Engineer | Full Stack Developer | MERN Stack",
   location:   "Nagpur, India",
   email:      "yogeshnagrare2004@gmail.com",
   phone:      "+91 9284150677",
-  website:    "",
+  website:    "https://y-portfolio-flame.vercel.app/",
   github:     "https://github.com/Yogesh-Nagrare",
   linkedin:   "https://www.linkedin.com/in/yogesh-nagrare4/",
   bio:        "BTech student at YCCE Nagpur passionate about building full-stack web applications and solving DSA problems. I enjoy building developer tools, exploring backend systems and integrating AI into applications.",
@@ -22,10 +22,11 @@ export const USER = {
 };
 
 export const SKILLS = [
+  { category: "ai_engineer", proficiency: 85, years: 1, tools: ["Vector Databases", "LangChain", "LangGraph", "RAG"] },
   { category: "frontend",  proficiency: 80, years: 2, tools: ["React", "Next.js", "Tailwind", "HTML", "CSS", "JavaScript"] },
   { category: "backend",   proficiency: 82, years: 2, tools: ["Node.js", "Express", "REST API"] },
   { category: "database",  proficiency: 90, years: 2, tools: ["MongoDB", "Redis", "SQL"] },
-  { category: "languages", proficiency: 90, years: 3, tools: ["JavaScript", "C++", "Solidity"] },
+  { category: "languages", proficiency: 90, years: 3, tools: ["JavaScript", "C++", "C"] },
 ];
 
 export const PROJECTS = [
@@ -93,7 +94,7 @@ export const EXPERIENCE = [
 ];
 
 export const DSA_STATS = {
-  leetcode: { solved: 225, easy: 81, medium: 116, hard: 28},
+  leetcode: { solved: 270, easy: 106, medium: 136, hard: 28},
   gfg:      { solved: 113, score: 332, basic:15 , easy: 40, medium: 54, hard: 4},
   interviewbit: { solved: 3,},
 };
@@ -106,4 +107,5 @@ export const COLLECTIONS = [
   { name: "dsa_stats",  count: 3, icon: "🏆" },
   { name: "resume",     count: 1, icon: "📄" },
   { name: "contact",    count: 1, icon: "✉️" },
+  { name: "ai_assistant", count: 1, icon: "✦" }
 ];

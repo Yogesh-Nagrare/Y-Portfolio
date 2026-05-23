@@ -136,6 +136,7 @@ export default function App() {
         <MainView
           collection={activeCollection}
           onAction={(msg, type) => show(msg, type || "success")}
+          
         />
       </div>
 

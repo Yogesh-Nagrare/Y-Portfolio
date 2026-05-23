@@ -43,7 +43,7 @@ export default function AboutCollection({ onAction }) {
               <Field k="email"           v={USER.email} />
               {/* <Field k="experience_yrs"  v={USER.experience} /> */}
               <Field k="open_to_work"    v={USER.available} />
-              <a><Field k="github"          v={USER.github} /></a>
+              <Field k="github"          v={USER.github} />
               <Field k="linkedin"        v={USER.linkedin} />
               <Field k="bio"             v={USER.bio} />
             </div>

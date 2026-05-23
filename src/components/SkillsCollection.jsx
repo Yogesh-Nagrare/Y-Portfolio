@@ -3,6 +3,7 @@ import { Field, DocHeader, DocActions } from "./DocField";
 import { SKILLS } from "../data/portfolioData";
 
 const CAT_COLORS = {
+  ai_engineer: "#7c3aed",
   frontend:  "#7dd3fc",
   backend:   "#86efac",
   database:  "#fbbf24",
