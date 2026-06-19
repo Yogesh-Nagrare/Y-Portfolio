@@ -77,17 +77,16 @@ export const PROJECTS = [
 export const EXPERIENCE = [
   {
     _id:      "exp_001",
-    company:  "Personal Projects",
+    company:  "YCCE",
     role:     "Full Stack Developer",
-    type:     "Self Learning",
-    start:    "2023-01",
-    end:      null,
+    type:     "Internship",
+    start:    "2025-09",
+    end:      "2026-03",
     current:  true,
     location: "Nagpur, India",
     points: [
-      "Built multiple full stack applications using MERN stack",
-      "Integrated external APIs like Judge0 and AI APIs into projects",
-      "Practicing Data Structures and Algorithms regularly on coding platforms"
+      " Built a production-grade campus placement portal using the MERN stack following agile practices, connecting 500+ students with verified recruiters through real-time job postings and application tracking.",
+      "Architected RBAC for Admin, Recruiter, and Student roles with JWT authentication and middleware validation—reduced unauthorized access incidents to zero and supported 2,000+ daily API requests.",
     ],
     tech: ["React", "Node.js", "MongoDB", "Express"],
   },
