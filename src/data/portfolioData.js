@@ -93,7 +93,7 @@ export const EXPERIENCE = [
 ];
 
 export const DSA_STATS = {
-  leetcode: { solved: 270, easy: 106, medium: 136, hard: 28},
+  leetcode: { solved: 294, easy: 112, medium: 152, hard: 30},
   gfg:      { solved: 113, score: 332, basic:15 , easy: 40, medium: 54, hard: 4},
   interviewbit: { solved: 3,},
 };
