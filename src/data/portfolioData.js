@@ -6,7 +6,7 @@ export const USER = {
   // phone:      "+91 9284150677",
   // skill:      "MERN Stack (React, Node.js, Express, MongoDB) | JavaScript | DSA | AI Integration",
   branch:     "Computer Science and Engineering",
-  year:       "3rd Year",
+  year:       "4th Year",
   role:       "AI Engineer | Full Stack Developer | MERN Stack",
   location:   "Nagpur, India",
   email:      "yogeshnagrare2004@gmail.com",
@@ -93,7 +93,7 @@ export const EXPERIENCE = [
 ];
 
 export const DSA_STATS = {
-  leetcode: { solved: 294, easy: 112, medium: 152, hard: 30},
+  leetcode: { solved: 321, easy: 114, medium: 174, hard: 33},
   gfg:      { solved: 113, score: 332, basic:15 , easy: 40, medium: 54, hard: 4},
   interviewbit: { solved: 3,},
 };
